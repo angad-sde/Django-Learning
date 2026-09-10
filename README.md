@@ -24,6 +24,6 @@ DJANGO SET UP
 
 
 MAKING MIGRATIONS IN DJANGO
--
+-python3 manage.py makemirgrations
 
 
