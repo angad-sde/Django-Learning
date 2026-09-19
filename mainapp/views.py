@@ -10,7 +10,7 @@ def student_list(request):
     return render(
         request,
         "students/student_list.html",
-        {"students: students"}
+        {"students": students}
     )
 
 def student_create(request):
@@ -44,4 +44,32 @@ def student_update(request, id):
     student = get_object_or_404(Student, id=id)
 
     if(request.method == "POST"):
-        student.name = request.POST.get
+        student.name = request.POST.get("name")
+        student.email = request.POST.get("email")
+        student.age = request.POST.get("age")
+
+        student.save()
+
+        return redirect("student_list")
+
+    return render(
+       request,
+       "students/student_form.html",
+       {"student": student}
+    )    
+
+# DELETE: Delete a student
+def student_delete(request, id):
+    student = get_object_or_404(Student, id=id),
+
+    if request.method == "POST":
+        student.delete()
+
+        return redirect("student_list")
+
+    return render(
+        request,
+        "students/student_confirm_delete.html",
+        {"student":student}
+    )
+

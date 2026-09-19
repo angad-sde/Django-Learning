@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+</head>
+<body>
+    <h1>Student Management</h1>
+
+    <a href="{% url 'student_create' %}">
+        Add Student
+    </a>
+
+    <hr>
+
+    {% for student in students %}
+        <h3>{{ student.name }}</h3>
+
+        <p>Email: {{ student.email }}</p>
+        <p>Age: {{ student.age }}</p>
+
+        <a href="{% url 'student_detail' student.id %}">
+            View
+        </a>
+
+        <a href="{% url 'student_update' student.id %}">
+            Edit
+        </a>
+
+        <a href="{% url 'student_delete' student.id %}">
+            Delete
+        </a>
+
+        <hr>
+    {% empty %}
+        <p>No students yet.</p>
+    {% endfor %}
+</body>
+</html>
